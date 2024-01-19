@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelDisen</title>
+    <link rel="icon" href="./assets/images/cumanlogo.png" type="image/png">
+    <style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+header {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 50px;
+    text-align: center;
+    border-bottom: 2px solid #34495e;
+    line-height: 85px; /* Sesuaikan nilai sesuai kebutuhan Anda */
+    height: 60px; /* Sesuaikan nilai sesuai kebutuhan Anda */
+    position: relative;
+}
+
+nav {
+    background-color: #34495e;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    height: 80px; /* Sesuaikan nilai tinggi navbar sesuai kebutuhan Anda */
+}
+nav a.active {
+        background-color: #2c3e50; /* Atur warna latar belakang sesuai keinginan Anda */
+        border-radius: 30px;
+    }
+
+        nav a:hover {
+            background-color: #2c3e50;
+        }
+
+nav .logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+.ribbon {
+            position: absolute;
+            top: 10px;
+            right: -10px;
+            background-color: #e74c3c;
+            color: #fff;
+            padding: 10px 10px;
+            transform: rotate(45deg);
+            z-index: 1;
+            font-size: 12px;
+        }
+
+/* ... (style lainnya) */
+
+
+
+
+        nav a {
+            float: left;
+            display: block;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-radius: 30px;
+        }
+
+        nav a:hover {
+            background-color: #2c3e50;
+            border-radius: 30px;
+        }
+
+        .cart-icon,
+        .cart-icon:hover {
+            background-color: #2c3e50;
+        }
+
+        .cart-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background-color: #fff;
+            color: #333;
+            padding: 20px;
+            display: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        .cart-container button {
+            background-color: #e74c3c;
+            color: #ecf0f1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cart-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-container li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity button {
+            background-color: #3498db;
+            color: #ecf0f1;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        .quantity button:hover {
+            background-color: #2980b9;
+        }
+
+        .book-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    margin-top: 20px; /* Sesuaikan margin-top sesuai kebutuhan Anda */
+}
+
+        .book {
+            width: 20%; /* Reduced width to fit 4 items */
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .book:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .book img {
+            width: 100%; /* Mengurangi lebar gambar menjadi 85% dari lebar container */
+            max-height: 350px; /* Menambahkan max-height agar gambar tidak terlalu tinggi */
+            object-fit: contain; /* Menggunakan contain agar gambar tetap proporsional di tengah container */
+            margin: 10px auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .book h2 {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .book p {
+            padding: 15px;
+            font-size: 14px;
+            text-align: center; 
+        }
+
+        .book button {
+            background-color: #3498db;
+            color: #ecf0f1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            display: block;
+            font-size: 14px;
+        }
+        /* Gaya tombol "Beli Sekarang" */
+.book button.buy-now-button {
+    background-color: #27ae60; /* Ganti dengan warna hijau yang diinginkan */
+    color: #fff; /* Warna teks tombol "Beli Sekarang" */
+    margin-top: 2px;
+}
+
+/* Efek hover untuk tombol "Beli Sekarang" */
+.book button.buy-now-button:hover {
+    background-color: #218c54; /* Ganti dengan warna hijau yang berbeda saat di-hover */
+}
+
+/* Efek hover untuk tombol "Tambah ke Keranjang" */
+.book button:hover:not(.buy-now-button) {
+    background-color: #2980b9; /* Ganti dengan warna lain sesuai keinginan Anda */
+}
+
+        .book button:hover {
+            background-color: #2980b9;
+        }
+
+        .checkout {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .checkout button {
+            background-color: #27ae60;
+            color: #ecf0f1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .checkout button:hover {
+            background-color: #219d54;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -10%, 0);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .book {
+                width: 90%;
+            }
+               nav {
+        padding-left: 10px;
+    }
+
+    nav .logo {
+        margin-right: 5px;
+    }
+
+    nav a {
+        padding: 10px 12px;
+    }
+        }
+
+        @media screen and (max-width: 480px) {
+            .book {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+        #purchaseForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-icons img {
+            width: 30px; /* Sesuaikan dengan ukuran yang diinginkan */
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Komik Naruto</h1>
+    </header>
+
+    <nav>
+        <img src="./assets/images/cumanlogo.png" alt="Logo" class="logo">
+        <a href="./index.html" class="home">Home</a>
+        <a href="./naruto.html" class="home">Naruto</a>
+        <a href="./onepiece.html" class="home">OP</a>
+        <a href="./saya.html" class="home">About</a>
+        <a class="cart-icon" onclick="toggleCart()">🛒</a>
+        <div id="cart" class="cart-container">
+            <h2>Keranjang</h2>
+            <ul id="cartItems"></ul>
+            <div class="checkout">
+                <p>Total: <span id="totalPrice">0</span></p>
+                <button onclick="checkout()">Checkout via WhatsApp</button>
+
+            </div>
+            <button onclick="closeCart()">Tutup</button>
+        </div>
+    </nav>
+
+    <div class="book-container">
+        <section class="book">
+            <div class="ribbon"> Diskon 90%</div>
+            <h2>Naruto Vol 1</h2>
+            <img src="./assets/images/09.jpg" alt="Gambar Buku 9">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 10.000</p>
+            <div>
+                <button onclick="addToCart('Buku 9', 10000)">Tambah ke Keranjang</button>
+                <button class="buy-now-button" onclick="buyNow('Buku 9', 10000)">Beli Sekarang</button>
+            </div>
+        </section>
+        
+
+        <section class="book">
+            <h2>Naruto Vol 2</h2>
+            <img src="./assets/images/10.jpg" alt="Gambar Buku 10">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 99.000</p>
+            <button onclick="addToCart('Buku 10', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 10', 99000)">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>Naruto Vol 3</h2>
+            <img src="./assets/images/11.jpg" alt="Gambar Buku 11">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 99.000</p>
+            <button onclick="addToCart('Buku 11', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 11', 99000)">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>NarutoVol 4</h2>
+            <img src="./assets/images/12.jpg" alt="Gambar Buku 12">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: 99.000</p>
+            <button onclick="addToCart('Buku 12', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 12', 99000)">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>NarutoVol 5</h2>
+            <img src="./assets/images/13.jpg" alt="Gambar Buku 13">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 99.000</p>
+            <button onclick="addToCart('Buku 13', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 13', 99000)">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>Naruto Vol 6</h2>
+            <img src="./assets/images/14.jpg" alt="Gambar Buku 14">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 99.000</p>
+            <button onclick="addToCart('Buku 14', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 14', 99000)">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>Naruto Vol 7</h2>
+            <img src="./assets/images/15.jpg" alt="Gambar Buku 15">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 99.000</p>
+            <button onclick="addToCart('Buku 15', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 15', 99000)">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>Naruto Vol 8</h2>
+            <img src="./assets/images/16.jpg" alt="Gambar Buku 16">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 99.000</p>
+            <button onclick="addToCart('Buku 16', 99000)">Tambah ke Keranjang</button>
+            <button class="buy-now-button" onclick="buyNow('Buku 16', 99000)">Beli Sekarang</button>
+        </section>
+        <form id="purchaseForm" action="proses_pembelian.php" method="post">
+            <label for="nama">Nama:</label>
+            <input type="text" id="nama" name="nama" required>
+            
+            <label for="alamat">Alamat:</label>
+            <textarea id="alamat" name="alamat" required></textarea>
+        
+            <input type="hidden" id="produkDetails" name="produkDetails">
+            
+            <button type="submit">Beli Sekarang</button>
+        </form>
+        
+
+
+        <!-- Tambahkan lebih banyak informasi buku jika diperlukan -->
+
+    </div>
+    <footer>
+        <p>&copy; 2024 Meldisen Comic</p>
+        <div class="social-icons">
+            <a href="https://web.facebook.com/dis.en.75641/" target="_blank"><img src="./assets/icon/fb.png" alt="Facebook"></a>
+            <a href="https://x.com/CipicipiG20258?t=15XdnGTyfCO9U6LBl_Nhgw&s=08" target="_blank"><img src="./assets/icon/tw.png" alt="Twitter"></a>
+            <a href="https://www.instagram.com/disenmbeo_" target="_blank"><img src="./assets/icon/ig.png" alt="Instagram"></a>
+            <a href="https://github.com/Kaiden2002" target="_blank"><img src="./assets/icon/github.png" alt="GitHub"></a>
+            <!-- Ganti path/to/... dengan path aktual menuju ikon Anda -->
+        </div>
+    </footer>
+    
+
+    <script>
+        let cart = [];
+
+        function addToCart(bookTitle, bookPrice) {
+            const existingItem = cart.find(item => item.title === bookTitle);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ title: bookTitle, price: bookPrice, quantity: 1 });
+            }
+
+            updateCart();
+        }
+        function formatRupiah(price) {
+    const formatter = new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR'
+    });
+
+    return formatter.format(price);
+}
+
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const totalElement = document.getElementById('totalPrice');
+            
+            cartItems.innerHTML = '';
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                const listItem = document.createElement('li');
+                const quantityButtons = document.createElement('div');
+                quantityButtons.className = 'quantity';
+
+                const addButton = document.createElement('button');
+                addButton.textContent = '+';
+                addButton.onclick = () => {
+                    item.quantity += 1;
+                    updateCart();
+                };
+
+                const subtractButton = document.createElement('button');
+                subtractButton.textContent = '-';
+                subtractButton.onclick = () => {
+                    if (item.quantity > 1) {
+                        item.quantity -= 1;
+                    } else {
+                        cart = cart.filter(cartItem => cartItem.title !== item.title);
+                    }
+                    updateCart();
+                };
+
+                quantityButtons.appendChild(addButton);
+                quantityButtons.appendChild(subtractButton);
+
+                listItem.textContent = `${item.title} - ${formatRupiah(item.price)} x ${item.quantity}`;
+                listItem.appendChild(quantityButtons);
+                cartItems.appendChild(listItem);
+                totalPrice += item.price * item.quantity;
+            });
+
+            // Tampilkan total harga di dalam keranjang
+            const cartContainer = document.getElementById('cart');
+            cartContainer.style.display = 'block';
+            totalElement.textContent = formatRupiah(totalPrice);
+        }
+
+        function toggleCart() {
+            const cartContainer = document.getElementById('cart');
+            cartContainer.style.display = (cart.length > 0) ? 'block' : 'none';
+        }
+
+        function closeCart() {
+            const cartContainer = document.getElementById('cart');
+            cartContainer.style.display = 'none';
+        }
+
+        function checkout() {
+            const form = document.getElementById('purchaseForm');
+    const namaInput = document.getElementById('nama');
+    const alamatInput = document.getElementById('alamat');
+    const produkDetailsInput = document.getElementById('produkDetails');
+
+    // Mengambil informasi produk dari keranjang
+    const produkDetails = getCartItemsText();
+    const totalPriceText = document.getElementById('totalPrice').textContent;
+
+    // Mengisi informasi ke dalam formulir
+    produkDetailsInput.value = produkDetails;
+
+    // Menampilkan formulir pembelian
+    form.style.display = 'block';
+
+    const whatsappMessage = encodeURIComponent(`Halo, saya ingin memesan buku:\n\n${getCartItemsText()}\nTotal: ${totalPriceText}`);
+
+
+            const whatsappLink = `https://api.whatsapp.com/send?phone=6281246941568&text=${whatsappMessage}`;
+            
+            window.location.href = whatsappLink;
+
+            // Reset cart
+            cart = [];
+            updateCart();
+        }
+
+        function getCartItemsText() {
+            return cart.map(item => `${item.title} - Rp${item.price} x ${item.quantity}`).join('\n');
+        }
+        function closeForm() {
+    const form = document.getElementById('purchaseForm');
+    form.style.display = 'none';
+}
+function buyNow(bookTitle, bookPrice) {
+        // Proses pesanan langsung
+        const whatsappMessage = encodeURIComponent(`Halo, saya ingin memesan buku:\n\n${bookTitle} - Rp${bookPrice}\nTotal: Rp${bookPrice}`);
+        const whatsappLink = `https://api.whatsapp.com/send?phone=6281246941568&text=${whatsappMessage}`;
+        window.location.href = whatsappLink;
+    }
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mendapatkan bagian akhir URL (slug) dari halaman
+            const currentPage = window.location.pathname.split("/").pop();
+
+            // Loop melalui setiap tautan di navbar
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                // Mendapatkan bagian akhir href dari tautan
+                const linkPath = link.getAttribute('href').split("/").pop();
+
+                // Periksa apakah bagian akhir URL cocok dengan bagian akhir href
+                if (currentPage === linkPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MelDisen</title>
+    <link rel="icon" href="./assets/images/cumanlogo.png" type="image/png">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 60px;
+            text-align: center;
+            border-bottom: 2px solid #34495e;
+            line-height: 30px; /* Sesuaikan nilai sesuai kebutuhan Anda */
+            height: auto; /* Mengubah tinggi header menjadi otomatis */
+            position: relative;
+            margin-top: 60px;
+        }
+
+        header img {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+        }
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        nav {
+            background-color: #34495e;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            height: 80px;
+        }
+
+        nav .logo {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border-radius: 30px;
+        }
+
+        nav a:hover {
+            background-color: #2c3e50;
+            border-radius: 30px;
+        }
+        nav a.active {
+        background-color: #2c3e50; /* Atur warna latar belakang sesuai keinginan Anda */
+        border-radius: 30px;
+    }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .book-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .book {
+            width: 48%; /* Mengubah lebar buku menjadi 48% agar dua kolom dapat muat */
+            margin: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            overflow: hidden;
+        }
+        .book:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .book img {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .book:hover img {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .book-content {
+            padding: 15px;
+            text-align: left;
+        }
+
+        .book h2 {
+            margin: 10px 0;
+            font-size: 30px;
+            color: #3498db;
+            text-align: center;
+        }
+
+        .book p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .book button {
+            background-color: #e74c3c;
+            color: #ecf0f1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .book button:hover {
+            background-color: #c0392b;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-icons img {
+            width: 30px; /* Sesuaikan dengan ukuran yang diinginkan */
+        }
+            @media screen and (max-width: 768px) {
+        header {
+            padding: 40px;
+        }
+
+        .book {
+            width: 100%;
+        }
+                   nav {
+        padding-left: 10px;
+    }
+
+    nav .logo {
+        margin-right: 5px;
+    }
+
+    nav a {
+        padding: 10px 12px;
+    }
+                
+    }
+
+    @media screen and (max-width: 480px) {
+        header {
+            padding: 20px;
+        }
+
+        nav {
+            padding-left: 10px;
+        }
+
+        .book {
+            width: 100%;
+        }
+    }
+    </style>
+    </style>
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MelDisen Comic</h1>
+        <p>Toko Komik Online
+            Pelanggan Nomor Satu Penjual Nomor 2
+        </p>
+        <img src="./assets/images/banner.png" alt="Banner">
+    </header>
+
+    <nav>
+        <img src="./assets/images/cumanlogo.png" alt="Logo" class="logo">
+        <a href="./index.html" class="home">Home</a>
+        <a href="./naruto.html" class="home">Naruto</a>
+        <a href="./onepiece.html" class="home">OP</a>
+        <a href="./saya.html" class="home">About</a>
+        <!-- Tambahkan item navigasi lainnya sesuai kebutuhan -->
+    </nav>
+
+    <div class="content">
+        <section class="book">
+            <h2>NARUTO</h2>
+            <img src="./assets/images/./nr.jpg" alt="Gambar Buku 1">
+            <p>Naruto Uzumaki, seorang ninja yang hiperaktif, periang, dan ambisius yang ingin mewujudkan keinginannya untuk mendapatkan gelar "Hokage".</p>
+            <p>Harga: Rp 10.000</p>
+            <button onclick="redirectToNaruto()">Beli Sekarang</button>
+        </section>
+        <section class="book">
+            <h2>ONE PIECE</h2>
+            <img src="./assets/images/./op.jpg" alt="Gambar Buku 1">
+            <p>Saat masih kecil, Monkey D. Luffy bersumpah untuk menjadi Raja Bajak Laut dan menemukan harta karun legendaris yang disebut "One Piece".</p>
+            <p>Harga: Rp 10.000</p>
+            <button onclick="redirectToOnePiece()">Beli Sekarang</button>
+        </section>
+        <!-- Tambahkan item konten lainnya sesuai kebutuhan -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Meldisen Comic</p>
+        <div class="social-icons">
+            <a href="https://web.facebook.com/dis.en.75641/" target="_blank"><img src="./assets/icon/fb.png" alt="Facebook"></a>
+            <a href="https://x.com/CipicipiG20258?t=15XdnGTyfCO9U6LBl_Nhgw&s=08" target="_blank"><img src="./assets/icon/tw.png" alt="Twitter"></a>
+            <a href="https://www.instagram.com/disenmbeo_" target="_blank"><img src="./assets/icon/ig.png" alt="Instagram"></a>
+            <a href="https://github.com/Kaiden2002" target="_blank"><img src="./assets/icon/github.png" alt="GitHub"></a>
+            <!-- Ganti path/to/... dengan path aktual menuju ikon Anda -->
+        </div>
+    </footer>
+
+
+    <script>
+        
+
+        function redirectToNaruto() {
+            window.location.href = './naruto.html';
+        }
+        function redirectToOnePiece() {
+            window.location.href = './onepiece.html';
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Mendapatkan bagian akhir URL (slug) dari halaman
+            const currentPage = window.location.pathname.split("/").pop();
+
+            // Loop melalui setiap tautan di navbar
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                // Mendapatkan bagian akhir href dari tautan
+                const linkPath = link.getAttribute('href').split("/").pop();
+
+                // Periksa apakah bagian akhir URL cocok dengan bagian akhir href
+                if (currentPage === linkPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
+
+    
+
+</body>
+</html>
